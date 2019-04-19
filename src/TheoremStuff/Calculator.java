@@ -1,12 +1,8 @@
 package TheoremStuff;
 
 public class Calculator {
-    private boolean isPossible;
-
     private double a, b, c;
     private double aAngle, bAngle, cAngle;
-
-    private double surface;
 
     public Calculator(){
         this.a = 0;
@@ -14,14 +10,13 @@ public class Calculator {
         this.c = 0;
     }
     public boolean setSideSizes(double a, double b, double c){
-        this.isPossible = checkPossible(a, b, c);
         if(checkPossible(a, b, c)){
             this.a = a;
             this.b = b;
             this.c = c;
-            return this.isPossible;
+            return true;
         }
-        return this.isPossible;
+        return false;
     }
     public void setAngleSizes(double aAngle, double bAngle, double cAngle){
         this.aAngle = aAngle;
@@ -64,6 +59,7 @@ public class Calculator {
     public double getcHeight(){
         return (2 * getSurface()) / this.c;
     }
+
     public double getaMedian(){
         double m = 2 * (b * b) + 2 * (c * c) - (a * a);
         m = Math.sqrt(m);
@@ -89,7 +85,6 @@ public class Calculator {
         s = getSemiperimeter();
         surface = s * (s - this.a) * (s - this.b) * (s - this.c);
         surface = Math.sqrt(surface);
-        this.surface = surface;
         return surface;
     }
     public double getPerimeter(){
