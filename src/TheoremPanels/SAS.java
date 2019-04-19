@@ -63,30 +63,24 @@ public class SAS extends JPanel {
                 } catch (NumberFormatException error) {
                     bSide.setText("Invalid!");
                 }
-                if(calculate() && t.setSideSizes(a, b, c)){
+                calculate();
+                if(t.checkAngles() && t.setSideSizes(a, b, c)){
                     //If the triangle is possible, calculate the triangles and all the triangle properties
-                    calculateAll();
+                    infopanel.updateText();
                 }
             }
         });
     }
-    private boolean calculate(){
+    private void calculate(){
         c = (a * a) + (b * b) - 2 * a * b * Math.cos(cAngle);
         c = Math.sqrt(c);
 
         aAngle = (b * b) + (c * c) - (a * a);
         aAngle = aAngle / (2 * b * c);
         aAngle = Math.acos(aAngle);
+
         bAngle = Math.PI - aAngle - cAngle;
 
-        if(aAngle <= 0 || bAngle <= 0 || cAngle <= 0){
-            return false;
-        }
         t.setAngleSizes(Math.toDegrees(aAngle), Math.toDegrees(bAngle), Math.toDegrees(cAngle));
-        return true;
-    }
-    public void calculateAll(){
-        //Update text on button press
-        this.infopanel.updateText();
     }
 }

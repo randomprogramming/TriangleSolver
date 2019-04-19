@@ -28,6 +28,12 @@ public class Calculator {
         this.bAngle = bAngle;
         this.cAngle = cAngle;
     }
+    public boolean checkAngles(){
+        if(aAngle <= 0 || bAngle <= 0 || cAngle <= 0){
+            return false;
+        }
+        return true;
+    }
 
     public double getA() {
         return a;

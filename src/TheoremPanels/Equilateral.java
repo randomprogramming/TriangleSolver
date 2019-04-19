@@ -49,24 +49,20 @@ public class Equilateral extends JPanel {
                 } catch (NumberFormatException error) {
                     aSide.setText("Invalid!");
                 }
-                if(calculate() && t.setSideSizes(a, b, c)){
+                calculate();
+                if(t.checkAngles() && t.setSideSizes(a, b, c)){
                     //If the triangle is possible, calculate the triangles and all the triangle properties
-                    calculateAll();
+                    infopanel.updateText();
                 }
             }
         });
     }
-    private boolean calculate(){
+    private void calculate(){
         cAngle = (a * a) + (b * b) - (c * c);
         cAngle /= 2 * a * b;
         cAngle = Math.acos(cAngle);
         aAngle = bAngle = cAngle;
 
         t.setAngleSizes(Math.toDegrees(aAngle), Math.toDegrees(bAngle), Math.toDegrees(cAngle));
-        return true;
-    }
-    public void calculateAll(){
-        //Update text on button press
-        this.infopanel.updateText();
     }
 }

@@ -63,28 +63,20 @@ public class AAS extends JPanel {
                 } catch (NumberFormatException error) {
                     aSide.setText("Invalid!");
                 }
-                if(calculate() && t.setSideSizes(a, b, c)){
+                calculate();
+                if(t.checkAngles() && t.setSideSizes(a, b, c)){
                     //If the triangle is possible, calculate the triangles and all the triangle properties
-                    calculateAll();
+                    infopanel.updateText();
                 }
             }
         });
     }
-    private boolean calculate(){
+    private void calculate(){
         cAngle = Math.PI - aAngle - bAngle;
-
-        if(aAngle <= 0 || bAngle <= 0 || cAngle <= 0){
-            return false;
-        }
 
         b = (a * Math.sin(bAngle)) / Math.sin(aAngle);
         c = (a * Math.sin(cAngle)) / Math.sin(aAngle);
 
         t.setAngleSizes(Math.toDegrees(aAngle), Math.toDegrees(bAngle), Math.toDegrees(cAngle));
-        return true;
-    }
-    public void calculateAll(){
-        //Update text on button press
-        this.infopanel.updateText();
     }
 }

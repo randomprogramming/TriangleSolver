@@ -65,14 +65,15 @@ public class SSS extends JPanel {
                 } catch (NumberFormatException error) {
                     cSide.setText("Invalid!");
                 }
-                if(t.setSideSizes(a, b, c) && calculate()){
+                calculate();
+                if(t.checkAngles() && t.setSideSizes(a, b, c)){
                     //If the triangle is possible, calculate the triangles and all the triangle properties
-                    calculateAll();
+                    infopanel.updateText();
                 }
             }
         });
     }
-    private boolean calculate() {
+    private void calculate() {
         //this is used to get all sides and angles to feed them to the calculator
         aAngle = (b * b) + (c * c) - (a * a);
         aAngle = aAngle / (2 * b * c);
@@ -86,14 +87,6 @@ public class SSS extends JPanel {
         cAngle = cAngle / (2 * a * b);
         cAngle = Math.acos(cAngle);
 
-        if(aAngle <= 0 || bAngle <= 0 || cAngle <= 0){
-            return false;
-        }
         t.setAngleSizes(Math.toDegrees(aAngle), Math.toDegrees(bAngle), Math.toDegrees(cAngle));
-        return true;
-    }
-    public void calculateAll(){
-        //Update text on button press
-        this.infopanel.updateText();
     }
 }

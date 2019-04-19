@@ -64,14 +64,15 @@ public class SSA extends JPanel {
                 } catch (NumberFormatException error) {
                     bAngleField.setText("Invalid!");
                 }
-                if(t.setSideSizes(a, b, c) && calculate()){
+                calculate();
+                if(t.checkAngles() && t.setSideSizes(a, b, c) ){
                     //If the triangle is possible, calculate the triangle properties
-                    calculateAll();
+                    infopanel.updateText();
                 }
             }
         });
     }
-    private boolean calculate(){
+    private void calculate(){
         //this is used to calculate all sides and angles
         aAngle = (Math.sin(bAngle) * a) / b;
         cAngle = Math.PI - aAngle - bAngle;
@@ -79,13 +80,6 @@ public class SSA extends JPanel {
         c = (a * a) + (b * b) - 2 * a * b * Math.cos(cAngle);
         c = Math.sqrt(c);
 
-        if(aAngle <= 0 || bAngle <= 0 || cAngle <= 0){
-            return false;
-        }
         t.setAngleSizes(Math.toDegrees(aAngle), Math.toDegrees(bAngle), Math.toDegrees(cAngle));
-        return true;
-    }
-    public void calculateAll(){
-        infopanel.updateText();
     }
 }
